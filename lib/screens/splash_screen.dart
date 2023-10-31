@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                         child: Image.asset(
                             "assets/splash_screen_logo.png",
-                          filterQuality: FilterQuality.low,
+                          filterQuality: FilterQuality.high,
                         ),
                       ),
                     ),
