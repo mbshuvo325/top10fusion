@@ -18,6 +18,9 @@ import 'package:one_context/one_context.dart';
 import 'package:provider/provider.dart';
 import 'package:route_transitions/route_transitions.dart';
 
+import '../helpers/addons_helper.dart';
+import '../key_page.dart';
+
 class Main extends StatefulWidget {
   Main({Key? key, go_back = true}) : super(key: key);
 
@@ -66,6 +69,7 @@ class _MainState extends State<Main> {
   }
 
   void initState() {
+     getData();
     _children = [
       Home(),
       CategoryList(
@@ -82,6 +86,16 @@ class _MainState extends State<Main> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     super.initState();
+  }
+
+  getData() async{
+    final status = await AddonsHelper().setAddonsData();
+    if(status == false){
+      Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) {
+          return KeyPage();
+        },),(route)=>false,);
+    }
   }
 
   @override

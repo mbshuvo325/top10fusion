@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
+import '../key_page.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -88,8 +90,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: Hero(
                       tag: "splashscreenImage",
                       child: Container(
-                        height: 72,
-                        width: 72,
+                        height: 200,
+                        width: 200,
                         padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
                         decoration: BoxDecoration(
                           color: MyTheme.white,
@@ -112,14 +114,14 @@ class _SplashScreenState extends State<SplashScreen> {
                           color: Colors.white),
                     ),
                   ),
-                  Text(
-                    "V " + _packageInfo.version,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0,
-                        color: Colors.white,
-                    ),
-                  ),
+                  // Text(
+                  //   "V " + _packageInfo.version,
+                  //   style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: 14.0,
+                  //       color: Colors.white,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -139,19 +141,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-/*
-            Padding(
-              padding: const EdgeInsets.only(top: 120.0),
-              child: Container(
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-
-                    ],
-                  )),
-            ),*/
           ],
         ),
       ),
@@ -162,7 +151,6 @@ class _SplashScreenState extends State<SplashScreen> {
     access_token.load().whenComplete(() {
       AuthHelper().fetch_and_set();
     });
-    //AddonsHelper().setAddonsData();
     BusinessSettingHelper().setBusinessSettingData();
     await app_language.load();
     await app_mobile_language.load();

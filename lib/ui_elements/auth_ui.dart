@@ -41,12 +41,12 @@ class AuthScreen{
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
 
-                            width: 72,
-                            height: 72,
+                            width: 150,
+                            height: 150,
                             decoration: BoxDecoration(
                                 color: MyTheme.white,
                                 borderRadius: BorderRadius.circular(8)),
-                            child: Image.asset('assets/login_registration_form_logo.png'),
+                            child: Image.asset('assets/splash_screen_logo.png'),
                           ),
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
