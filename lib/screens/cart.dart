@@ -75,7 +75,6 @@ class _CartState extends State<Cart> {
     getCartCount();
     var cartResponseList =
         await CartRepository().getCartResponseList(user_id.$);
-
     if (cartResponseList != null && cartResponseList.length > 0) {
       _shopList = cartResponseList;
     }
@@ -90,12 +89,9 @@ class _CartState extends State<Cart> {
       _shopList.forEach((shop) {
         if (shop.cart_items.length > 0) {
           shop.cart_items.forEach((cart_item) {
-            _cartTotal += double.parse(
-                ((cart_item.price + cart_item.tax) * cart_item.quantity)
-                    .toStringAsFixed(2));
-            _cartTotalString =
-                "${SystemConfig.systemCurrency!.symbol}${_cartTotal.toStringAsFixed(2)}";
+            _cartTotal += double.tryParse(cart_item.price)! + double.tryParse(cart_item.tax)! * cart_item.quantity;
           });
+          _cartTotalString = "${SystemConfig.systemCurrency!.symbol}${_cartTotal.toStringAsFixed(2)}";
         }
       });
     }
@@ -108,12 +104,10 @@ class _CartState extends State<Cart> {
     var partialTotalString = "";
     if (_shopList[index].cart_items.length > 0) {
       _shopList[index].cart_items.forEach((cart_item) {
-        partialTotal += (cart_item.price + cart_item.tax) * cart_item.quantity;
-        partialTotalString =
-            "${SystemConfig.systemCurrency!.symbol}${partialTotal.toStringAsFixed(2)}";
+        partialTotal += double.tryParse(cart_item.price)! + double.tryParse(cart_item.tax)! * cart_item.quantity;
       });
+      partialTotalString = "${SystemConfig.systemCurrency!.symbol}${partialTotal.toStringAsFixed(2)}";
     }
-
     return partialTotalString;
   }
 
@@ -538,7 +532,6 @@ class _CartState extends State<Cart> {
                       ),
                       Spacer(),
                       Text(
-
                         partialTotalString(index),
                         style: TextStyle(
                             color: MyTheme.accent_color,
@@ -628,13 +621,8 @@ class _CartState extends State<Cart> {
                         children: [
                           Text(
                             SystemConfig.systemCurrency!.symbol!+
-                                (_shopList[seller_index]
-                                            .cart_items[item_index]
-                                            .price *
-                                        _shopList[seller_index]
-                                            .cart_items[item_index]
-                                            .quantity)
-                                    .toStringAsFixed(2),
+                                (double.tryParse(_shopList[seller_index].cart_items[item_index].price)! *
+                                        _shopList[seller_index].cart_items[item_index].quantity).toStringAsFixed(2),
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,

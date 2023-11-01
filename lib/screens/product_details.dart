@@ -412,7 +412,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
       if (mode == "add_to_cart") {
         if (snackbar != null && context != null) {
-          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          //ScaffoldMessenger.of(context).showSnackBar(snackbar);
         }
         reset();
         fetchAll();

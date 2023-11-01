@@ -30,8 +30,11 @@ class CartRepository {
       },
       body: '',middleware: BannedUser()
     );
-
-    return cartResponseFromJson(response.body);
+    final data = json.decode(response.body);
+    final decodeData = data["data"];
+    print("decodeData $decodeData");
+    final listData = decodeData.map((item) => CartResponse.fromJson(item)).toList();
+    return listData;
   }
 
   Future<dynamic> getCartCount() async {

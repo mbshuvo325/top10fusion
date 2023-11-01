@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-List<CartResponse> cartResponseFromJson(String str) => List<CartResponse>.from(json.decode(str).map((x) => CartResponse.fromJson(x)));
+List<CartResponse> cartResponseFromJson(String str) => List<CartResponse>.from(json.decode(str).map((x) => CartResponse.fromJson(x))).toList();
 
 String cartResponseToJson(List<CartResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -57,9 +57,9 @@ class CartItem {
   String? product_name;
   String? product_thumbnail_image;
   String? variation;
-  double? price;
+  String? price;
   String? currency_symbol;
-  double? tax;
+  String? tax;
   double? shipping_cost;
   int? quantity;
   int? lower_limit;
@@ -73,9 +73,9 @@ class CartItem {
     product_name: json["product_name"] == null ? null : json["product_name"],
     product_thumbnail_image: json["product_thumbnail_image"] == null ? null : json["product_thumbnail_image"],
     variation: json["variation"] == null ? null : json["variation"],
-    price: json["price"] == null ? null : json["price"].toDouble(),
+    price: json["price"] == null ? null : json["price"].toString().replaceAll("BDT", '').replaceAll(",", ""),
     currency_symbol: json["currency_symbol"] == null ? null : json["currency_symbol"],
-    tax: json["tax"] == null ? null : json["tax"].toDouble(),
+    tax: json["tax"] == null ? null : json["tax"].toString().replaceAll("BDT", '').replaceAll(",", ""),
     shipping_cost: json["shipping_cost"] == null ? null : json["shipping_cost"].toDouble(),
     quantity: json["quantity"] == null ? null : json["quantity"],
     lower_limit: json["lower_limit"] == null ? null : json["lower_limit"],
